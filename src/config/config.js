@@ -36,7 +36,7 @@ const CONFIG = {
       PORT: PORT || 4000,
     },
     db: {
-      url: MONGO_DB_URL_DEVELOPMENT,
+      url: MONGO_DB_URL_PRODUCTION,
     },
     url: {
       client: CLIENT_URL,
