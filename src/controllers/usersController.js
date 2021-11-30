@@ -20,6 +20,7 @@ async function createNewUser(req, res) {
       });
       return res.status(200).send({
         message: `Welcome ${newUser.userName} to our servise`,
+        newUser: newUser,
       });
     }
   } catch (error) {
@@ -29,7 +30,7 @@ async function createNewUser(req, res) {
   }
 }
 
-async function login() {
+async function login(req, res) {
   const { email, password, ...rest } = req.body;
 
   try {
