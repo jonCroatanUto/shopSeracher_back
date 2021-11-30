@@ -1,5 +1,5 @@
 const { login, createNewUser } = require("./usersController");
-const { creatNewList } = require("./shopListController");
+const { creatNewList, addShopInList } = require("./shopListController");
 const { saveShopAsFavorite } = require("./shopController");
 
 module.exports = {
@@ -7,4 +7,5 @@ module.exports = {
   login: login,
   creatNewList: creatNewList,
   saveShopAsFavorite: saveShopAsFavorite,
+  addShopInList: addShopInList,
 };
