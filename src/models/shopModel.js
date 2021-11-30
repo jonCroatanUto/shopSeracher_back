@@ -7,11 +7,20 @@ const ShopSchema = new Schema(
       type: String,
       default: "",
     },
+    businessType: {
+      type: String,
+      default: "",
+    },
 
     adress: {
       type: String,
       default: "",
-      require: [true, "please we need your adress"],
+      require: [true, "the shop adress is not setted"],
+    },
+    coordinates: {
+      type: String,
+      default: "",
+      require: [true, "the coordinates adress is not setted"],
     },
     owner: [
       {
