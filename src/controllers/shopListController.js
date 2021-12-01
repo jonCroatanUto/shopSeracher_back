@@ -1,6 +1,6 @@
 const { shopListModel } = require("../models");
 
-async function creatNewList(res, req) {
+async function creatNewList(req, res) {
   const { shopListName, ...rest } = req.body;
 
   try {
@@ -8,17 +8,17 @@ async function creatNewList(res, req) {
       shopListName: shopListName,
     });
     if (foundShopList) {
-      return res.stauts(200).send({
+      return res.status(200).send({
         message: `Please choose another name for your list. ${shopListName} already exist `,
       });
     } else {
-      const { shopListName } = await shopListModel.create({
+      const newList = await shopListModel.create({
         shopListName: shopListName,
 
         ...rest,
       });
       return res.status(200).send({
-        message: `the shop ${shopListName} was succesfully saved`,
+        message: `the shop ${newList.shopListName} was succesfully saved`,
       });
     }
   } catch (error) {
@@ -27,16 +27,16 @@ async function creatNewList(res, req) {
     });
   }
 }
-async function addShopInList(res, req) {
-  const { shopId, shopListName, ...rest } = req.body;
+async function addShopInList(req, res) {
+  const { shopId, shopListID } = req.body;
 
   try {
     const foundShopList = await shopListModel.findOne({
-      shopListName: shopListName,
+      shopListID: shopListID,
     });
     if (!foundShopList) {
       return res.stauts(200).send({
-        message: `The list ${shopListName} doesn't exist `,
+        message: `The list shop doesn't exist `,
       });
     } else {
       const existInList = foundShopList.shops.indexOf(shopId);
@@ -44,11 +44,16 @@ async function addShopInList(res, req) {
       if (existInList === -1) {
         // if not :added
         foundShopList.shops.push(shopId);
+        foundShopList.save();
+        return res.status(200).send({
+          message: `the shop  was added to ${foundShopList.shopListName} `,
+          updatedlist: foundShopList,
+        });
+      } else {
+        return res.status(200).send({
+          message: `this shop it's already exist in the list: ${foundShopList.shopListName} `,
+        });
       }
-      return res.status(200).send({
-        message: `the shop  was added to ${shopListName} `,
-        updatedlist: foundShopList,
-      });
     }
   } catch (error) {
     return res.status(500).send({

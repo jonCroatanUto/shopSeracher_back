@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "7393d34d-4450-4e8f-8d4c-fe4a6c2183ea",
+		"name": "shopSearcher",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register shopsearche",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\":\"first\",\n\"email\":\"first@gmail.com\",\n\"password\":\"111111\",\n\"name\":\"firstName\",\n\"lastName\":\"lastName\",\n\"adress\":\"C/first name\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"fjdjdj.com\",\n\"password\":\"111\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/users/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save a shop as a favourite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shopName\":\"snakShop\",\n\"businessType\":\"shop\",\n\"adress\":\"C/pascual\",\n\"owner\":\"61a698e4743bbb430b1ebafe\",\n   \"latitude\" :36.0453,\n\"longitude\":-118.2413\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/shop/saveShop",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shop",
+						"saveShop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shopListName\":\"my First list Shop\",\n\"shops\":\"61a7413cd880febec7208edf\",\n\"owner\":\"61a698e4743bbb430b1ebafe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/shopList/newShopList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shopList",
+						"newShopList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
