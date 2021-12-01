@@ -1,17 +1,22 @@
 const { shopModel } = require("../models");
 
-async function saveShopAsFavorite(res, req) {
-  const { coordinates, ...rest } = req.body;
+async function saveShopAsFavorite(req, res) {
+  const { latitude, longitude, ...rest } = req.body;
 
   try {
-    const foundShop = await shopModel.findOne({ coordinates: coordinates });
+    const foundShop = await shopModel.findOne({
+      latitude: latitude,
+      longitude: longitude,
+    });
+    console.log(foundShop);
     if (foundShop) {
-      return res.stauts(200).send({
+      return res.status(200).send({
         message: `Sorry you already save this shop:${foundShop.shopName} `,
       });
     } else {
       const { shopName } = await shopModel.create({
-        coordinates: coordinates,
+        latitude: latitude,
+        longitude: longitude,
 
         ...rest,
       });

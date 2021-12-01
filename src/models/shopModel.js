@@ -17,10 +17,15 @@ const ShopSchema = new Schema(
       default: "",
       require: [true, "the shop adress is not setted"],
     },
-    coordinates: {
-      type: String,
+    latitude: {
+      type: Number,
       default: "",
-      require: [true, "the coordinates adress is not setted"],
+      require: [true, "the latitude adress is not setted"],
+    },
+    longitude: {
+      type: Number,
+      default: "",
+      require: [true, "the longitude adress is not setted"],
     },
     owner: [
       {

@@ -29,15 +29,32 @@ async function createNewUser(req, res) {
     });
   }
 }
-
+async function getUser(req, res) {
+  try {
+    const users = await userModel.find({});
+    if (users.length <= 0) {
+      return res.status(200).send({
+        message: "No users",
+      });
+    } else {
+      return res.status(200).send({
+        users: users,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
 async function login(req, res) {
-  const { email, password, ...rest } = req.body;
+  const { email, password } = req.body;
 
   try {
     const foundUser = await userModel.findOne({ email: email });
     if (!foundUser) {
-      return res.stauts(404).send({
-        message: `Sorry  ${foundUser.userName}, you are not register yet`,
+      return res.status(404).send({
+        message: `Sorry this email ${email}, is not register yet`,
       });
     } else {
       bcrypt.compare(password, foundUser.password).then((isExist) => {
@@ -60,4 +77,5 @@ async function login(req, res) {
 module.exports = {
   createNewUser: createNewUser,
   login: login,
+  getUser: getUser,
 };
