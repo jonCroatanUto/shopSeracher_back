@@ -1,5 +1,22 @@
 const { shopModel } = require("../models");
-
+async function getShops(req, res) {
+  try {
+    const shops = await shopModel.find({}).populate("owner");
+    if (shops.length <= 0) {
+      return res.status(200).send({
+        message: "No users",
+      });
+    } else {
+      return res.status(200).send({
+        shops: shops,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
 async function saveShopAsFavorite(req, res) {
   const { latitude, longitude, ...rest } = req.body;
 
@@ -32,5 +49,6 @@ async function saveShopAsFavorite(req, res) {
 }
 
 module.exports = {
+  getShops: getShops,
   saveShopAsFavorite: saveShopAsFavorite,
 };

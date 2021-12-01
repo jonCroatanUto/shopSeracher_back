@@ -119,7 +119,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"shopListName\":\"my First list Shop\",\n\"shops\":\"61a7413cd880febec7208edf\",\n\"owner\":\"61a698e4743bbb430b1ebafe\"\n}",
+					"raw": "{\n    \"shopListName\":\"2\",\n\"shops\":\"61a7413cd880febec7208edf\",\n\"owner\":\"61a698e4743bbb430b1ebafe\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,6 +136,75 @@
 					"path": [
 						"shopList",
 						"newShopList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get shop list with shops populates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/shopList/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shopList",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get shops with owner populate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/shop/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shop",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add a shop in a list",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shopId\":\"61a745bda67d41caabd5c0f6\",\n\"shopListID\":\"61a743ccc76f5bd274a482a0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/shopList/addShopinList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"shopList",
+						"addShopinList"
 					]
 				}
 			},

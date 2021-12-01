@@ -31,7 +31,7 @@ async function createNewUser(req, res) {
 }
 async function getUser(req, res) {
   try {
-    const users = await userModel.find({});
+    const users = await userModel.find({}).populate("shopList");
     if (users.length <= 0) {
       return res.status(200).send({
         message: "No users",
