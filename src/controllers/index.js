@@ -1,11 +1,9 @@
-const { login, createNewUser } = require("./usersController");
-const { creatNewList, addShopInList } = require("./shopListController");
-const { saveShopAsFavorite } = require("./shopController");
+const usersController = require("./usersController");
+const shopListController = require("./shopListController");
+const shopController = require("./shopController");
 
 module.exports = {
-  createNewUser: createNewUser,
-  login: login,
-  creatNewList: creatNewList,
-  saveShopAsFavorite: saveShopAsFavorite,
-  addShopInList: addShopInList,
+  usersController: usersController,
+  shopListController: shopListController,
+  shopController: shopController,
 };

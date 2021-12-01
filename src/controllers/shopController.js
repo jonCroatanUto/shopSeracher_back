@@ -1,17 +1,39 @@
 const { shopModel } = require("../models");
-
-async function saveShopAsFavorite(res, req) {
-  const { coordinates, ...rest } = req.body;
+async function getShops(req, res) {
+  try {
+    const shops = await shopModel.find({}).populate("owner");
+    if (shops.length <= 0) {
+      return res.status(200).send({
+        message: "No users",
+      });
+    } else {
+      return res.status(200).send({
+        shops: shops,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
+async function saveShopAsFavorite(req, res) {
+  const { latitude, longitude, ...rest } = req.body;
 
   try {
-    const foundShop = await shopModel.findOne({ coordinates: coordinates });
+    const foundShop = await shopModel.findOne({
+      latitude: latitude,
+      longitude: longitude,
+    });
+    console.log(foundShop);
     if (foundShop) {
-      return res.stauts(200).send({
+      return res.status(200).send({
         message: `Sorry you already save this shop:${foundShop.shopName} `,
       });
     } else {
       const { shopName } = await shopModel.create({
-        coordinates: coordinates,
+        latitude: latitude,
+        longitude: longitude,
 
         ...rest,
       });
@@ -27,5 +49,6 @@ async function saveShopAsFavorite(res, req) {
 }
 
 module.exports = {
+  getShops: getShops,
   saveShopAsFavorite: saveShopAsFavorite,
 };
