@@ -12,6 +12,7 @@ const {
   PORT,
   ENCRYPTION_SALT_DEVELOPMENT,
   ENCRYPTION_SALT_PRODUCTION,
+  GOOGLE_API_KEY,
 
   CLIENT_URL,
 } = process.env;
@@ -23,6 +24,7 @@ const CONFIG = {
     },
     db: {
       url: MONGO_DB_URL_PRODUCTION,
+      googleApi: GOOGLE_API_KEY,
     },
     url: {
       client: CLIENT_URL,
@@ -37,6 +39,7 @@ const CONFIG = {
     },
     db: {
       url: MONGO_DB_URL_PRODUCTION,
+      googleApi: GOOGLE_API_KEY,
     },
     url: {
       client: CLIENT_URL,
