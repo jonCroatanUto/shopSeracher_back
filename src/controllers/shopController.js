@@ -3,11 +3,11 @@ const axios = require("axios");
 const { config } = require("../config");
 
 async function getNearlyShops(req, res) {
-  const { type } = req.body;
+  const { type, latitude, longitude, radius } = req.body;
   try {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${type}&key=${config.db.googleApi}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=cruise&location=${latitude}%2C${longitude}&radius=${radius}&type=${type}&key=${config.db.googleApi}`
       )
       .then((response) => {
         return res.send(response.data);
@@ -20,7 +20,7 @@ async function getNearlyShops(req, res) {
 }
 async function getShops(req, res) {
   try {
-    const shops = await shopModel.find({}).populate("owner");
+    const shops = await shopModel.find({});
     if (shops.length <= 0) {
       return res.status(200).send({
         message: "No users",
@@ -37,27 +37,28 @@ async function getShops(req, res) {
   }
 }
 async function saveShopAsFavorite(req, res) {
-  const { latitude, longitude, ...rest } = req.body;
+  const { shopName, ...rest } = req.body;
+  console.log(req.body);
 
   try {
     const foundShop = await shopModel.findOne({
-      latitude: latitude,
-      longitude: longitude,
+      shopName: shopName,
     });
     console.log(foundShop);
     if (foundShop) {
       return res.status(200).send({
         message: `Sorry you already save this shop:${foundShop.shopName} `,
+        succes: false,
       });
     } else {
-      const { shopName } = await shopModel.create({
-        latitude: latitude,
-        longitude: longitude,
+      const newShop = await shopModel.create({
+        shopName: shopName,
 
         ...rest,
       });
       return res.status(200).send({
-        message: `the shop ${shopName} was succesfully saved`,
+        message: `the shop ${newShop.shopName} was succesfully saved`,
+        succes: true,
       });
     }
   } catch (error) {
