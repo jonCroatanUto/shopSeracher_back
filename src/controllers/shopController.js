@@ -37,27 +37,27 @@ async function getShops(req, res) {
   }
 }
 async function saveShopAsFavorite(req, res) {
-  const { shopName, ...rest } = req.body;
+  const { name, ...rest } = req.body;
   console.log(req.body);
 
   try {
     const foundShop = await shopModel.findOne({
-      shopName: shopName,
+      name: name,
     });
     console.log(foundShop);
     if (foundShop) {
       return res.status(200).send({
-        message: `Sorry you already save this shop:${foundShop.shopName} `,
+        message: `Sorry you already save this shop:${foundShop.name} `,
         succes: false,
       });
     } else {
       const newShop = await shopModel.create({
-        shopName: shopName,
+        name: name,
 
         ...rest,
       });
       return res.status(200).send({
-        message: `the shop ${newShop.shopName} was succesfully saved`,
+        message: `the shop ${newShop.name} was succesfully saved`,
         succes: true,
       });
     }

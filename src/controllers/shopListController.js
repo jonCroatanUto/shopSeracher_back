@@ -2,7 +2,7 @@ const { shopListModel, userModel } = require("../models");
 
 async function getListShops(req, res) {
   try {
-    const shopsList = await shopListModel.find({}).populate("shops");
+    const shopsList = await shopListModel.find({});
     console.log(shopsList);
     if (shopsList.length <= 0) {
       return res.status(200).send({
@@ -29,6 +29,7 @@ async function creatNewList(req, res) {
     if (foundShopList) {
       return res.status(200).send({
         message: `Please choose another name for your list. ${shopListName} already exist `,
+        succes: false,
       });
     } else {
       const newList = await shopListModel.create({
@@ -42,6 +43,7 @@ async function creatNewList(req, res) {
       findOwer.save();
       return res.status(200).send({
         message: `the shop ${newList.shopListName} was succesfully saved`,
+        succes: true,
       });
     }
   } catch (error) {
@@ -51,18 +53,20 @@ async function creatNewList(req, res) {
   }
 }
 async function addShopInList(req, res) {
-  const { shopId, shopListID } = req.body;
+  const { shopId, shopListName } = req.body;
 
   try {
     const foundShopList = await shopListModel.findOne({
-      shopListID: shopListID,
+      shopListName: shopListName,
     });
     if (!foundShopList) {
-      return res.stauts(200).send({
+      return res.status(200).send({
         message: `The list shop doesn't exist `,
+        succes: false,
       });
     } else {
       const existInList = foundShopList.shops.indexOf(shopId);
+
       // checking if the list it's already in the list
       if (existInList === -1) {
         // if not :added
@@ -70,6 +74,8 @@ async function addShopInList(req, res) {
         foundShopList.save();
         return res.status(200).send({
           message: `the shop  was added to ${foundShopList.shopListName} `,
+          succes: true,
+
           updatedlist: foundShopList,
         });
       } else {

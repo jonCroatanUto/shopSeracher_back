@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const ShopSchema = new Schema(
   {
-    shopName: {
+    name: {
       type: String,
       default: "",
     },
@@ -12,10 +12,16 @@ const ShopSchema = new Schema(
       default: "",
     },
 
-    adress: {
+    vicinity: {
       type: String,
       default: "",
       require: [true, "the shop adress is not setted"],
+    },
+    rating: {
+      type: Number,
+    },
+    user_ratings_total: {
+      type: Number,
     },
     latitude: {
       type: Number,
@@ -26,6 +32,9 @@ const ShopSchema = new Schema(
       type: Number,
       default: "",
       require: [true, "the longitude adress is not setted"],
+    },
+    icon: {
+      type: String,
     },
     owner: [
       {
