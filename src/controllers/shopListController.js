@@ -81,6 +81,7 @@ async function addShopInList(req, res) {
       } else {
         return res.status(200).send({
           message: `this shop it's already exist in the list: ${foundShopList.shopListName} `,
+          succes: false,
         });
       }
     }

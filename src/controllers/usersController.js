@@ -9,6 +9,7 @@ async function createNewUser(req, res) {
     if (foundUser) {
       return res.stauts(200).send({
         message: `the user with this email ${foundUser.email}, already exist`,
+        succes: false,
       });
     } else {
       const salt = await bcrypt.genSalt(10);
@@ -20,7 +21,41 @@ async function createNewUser(req, res) {
       });
       return res.status(200).send({
         message: `Welcome ${newUser.userName} to our servise`,
+        succes: true,
         newUser: newUser,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
+
+async function login(req, res) {
+  const { email, password } = req.body;
+
+  try {
+    const foundUser = await userModel.findOne({ email: email });
+    if (!foundUser) {
+      return res.status(404).send({
+        message: `Sorry this email ${email}, is not register yet`,
+        succes: false,
+      });
+    } else {
+      bcrypt.compare(password, foundUser.password).then((isExist) => {
+        if (isExist) {
+          return res.status(200).send({
+            message: `Welcome back ${foundUser.name}`,
+            succes: true,
+            foundUser: foundUser,
+          });
+        } else {
+          return res.status(500).send({
+            message: "incorrect password",
+            succes: false,
+          });
+        }
       });
     }
   } catch (error) {
@@ -39,32 +74,6 @@ async function getUser(req, res) {
     } else {
       return res.status(200).send({
         users: users,
-      });
-    }
-  } catch (error) {
-    return res.status(500).send({
-      message: error.message,
-    });
-  }
-}
-async function login(req, res) {
-  const { email, password } = req.body;
-
-  try {
-    const foundUser = await userModel.findOne({ email: email });
-    if (!foundUser) {
-      return res.status(404).send({
-        message: `Sorry this email ${email}, is not register yet`,
-      });
-    } else {
-      bcrypt.compare(password, foundUser.password).then((isExist) => {
-        if (isExist) {
-          return res.send("Welcome back" + foundUser.name);
-        } else {
-          return res.status(500).send({
-            message: "incorrect password",
-          });
-        }
       });
     }
   } catch (error) {
