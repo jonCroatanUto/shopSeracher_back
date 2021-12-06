@@ -1,7 +1,7 @@
 const { userModel } = require("../models");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
-
+const { GOOGLE_API_KEY } = process.env;
 async function createNewUser(req, res) {
   const { email, password, ...rest } = req.body;
 
@@ -87,7 +87,7 @@ async function getUserLocation(req, res) {
   try {
     axios
       .post(
-        "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDXisOj5QbywrYEfmzOXL0-7QF3HiLm87M"
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_API_KEY}`
       )
       .then((response) => {
         console.log(response);
