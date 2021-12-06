@@ -19,6 +19,32 @@ async function getListShops(req, res) {
     });
   }
 }
+async function getListShopsOfspecificOwner(req, res) {
+  const { ownerId } = req.query;
+  console.log("param recived", ownerId);
+  try {
+    const shopsList = await shopListModel.findOne({
+      owner: ownerId,
+    });
+    // const ownerList= shopsList.owner.indexOf(ownerId)
+
+    console.log("lists founded", shopsList);
+    if (shopsList === null) {
+      return res.status(200).send({
+        message: "Incorrect owner id",
+      });
+    } else {
+      return res.status(200).send({
+        shopsList: shopsList,
+      });
+    }
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
+
 async function creatNewList(req, res) {
   const { shopListName, ...rest } = req.body;
 
@@ -96,4 +122,5 @@ module.exports = {
   getListShops: getListShops,
   creatNewList: creatNewList,
   addShopInList: addShopInList,
+  getListShopsOfspecificOwner: getListShopsOfspecificOwner,
 };
