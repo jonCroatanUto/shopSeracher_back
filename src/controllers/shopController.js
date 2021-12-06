@@ -19,8 +19,13 @@ async function getNearlyShops(req, res) {
   }
 }
 async function getShops(req, res) {
+  const { ownerId } = req.params;
+  console.log(ownerId);
   try {
-    const shops = await shopModel.find({});
+    const shops = await shopModel.find({
+      owner: ownerId,
+    });
+    console.log(shops);
     if (shops.length <= 0) {
       return res.status(200).send({
         message: "No users",

@@ -20,16 +20,16 @@ async function getListShops(req, res) {
   }
 }
 async function getListShopsOfspecificOwner(req, res) {
-  const { ownerId } = req.query;
+  const { ownerId } = req.params;
   console.log("param recived", ownerId);
   try {
-    const shopsList = await shopListModel.findOne({
+    const shopsList = await shopListModel.find({
       owner: ownerId,
     });
     // const ownerList= shopsList.owner.indexOf(ownerId)
 
     console.log("lists founded", shopsList);
-    if (shopsList === null) {
+    if (shopsList.length === 0) {
       return res.status(200).send({
         message: "Incorrect owner id",
       });

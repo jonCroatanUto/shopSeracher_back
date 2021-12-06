@@ -4,7 +4,10 @@ const shopListRouter = Router();
 const { shopListController } = require("../controllers");
 
 shopListRouter.get("/", shopListController.getListShops);
-shopListRouter.get("/myList", shopListController.getListShopsOfspecificOwner);
+shopListRouter.get(
+  "/myList/:ownerId",
+  shopListController.getListShopsOfspecificOwner
+);
 
 shopListRouter.post("/newShopList", shopListController.creatNewList);
 shopListRouter.patch("/addShopinList", shopListController.addShopInList);
