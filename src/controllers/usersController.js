@@ -1,5 +1,6 @@
 const { userModel } = require("../models");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
 
 async function createNewUser(req, res) {
   const { email, password, ...rest } = req.body;
@@ -82,9 +83,26 @@ async function getUser(req, res) {
     });
   }
 }
-
+async function getUserLocation(req, res) {
+  try {
+    axios
+      .post(
+        "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDXisOj5QbywrYEfmzOXL0-7QF3HiLm87M"
+      )
+      .then((response) => {
+        console.log(response);
+        return res.send(response.data);
+      });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+}
 module.exports = {
   createNewUser: createNewUser,
   login: login,
   getUser: getUser,
+  getUserLocation: getUserLocation,
 };

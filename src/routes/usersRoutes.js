@@ -3,6 +3,7 @@ const userRouter = Router();
 const { usersController } = require("../controllers");
 
 userRouter.get("/", usersController.getUser);
+userRouter.post("/locateUser", usersController.getUserLocation);
 userRouter.post("/signup", usersController.createNewUser);
 userRouter.post("/signin", usersController.login);
 
