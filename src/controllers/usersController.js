@@ -2,6 +2,7 @@ const { userModel } = require("../models");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const { GOOGLE_API_KEY } = process.env;
+const { config } = require("../config");
 async function createNewUser(req, res) {
   const { email, password, ...rest } = req.body;
 
@@ -84,17 +85,16 @@ async function getUser(req, res) {
   }
 }
 async function getUserLocation(req, res) {
+  console.log(config.db.googleApi);
   try {
     axios
       .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=${GOOGLE_API_KEY}`
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${config.db.googleApi}`
       )
       .then((response) => {
-        console.log(response);
         return res.send(response.data);
       });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).send({
       message: error.message,
     });
