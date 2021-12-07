@@ -61,9 +61,8 @@ MONGO_DB_URL_PRODUCTION=
 - Need to have an acount in Altas mongoDB
 - Need to have the conecction atlas key
 ```
-[google api key](https://developers.google.com/maps/documentation/javascript/get-api-key)
-[Altas mongoDB](https://www.mongodb.com/es/cloud/atlas/register)
-[conecction atlas key](https://docs.atlas.mongodb.com/connect-to-cluster/)
+- [Altas mongoDB](https://www.mongodb.com/es/cloud/atlas/register)
+- [conecction atlas key](https://docs.atlas.mongodb.com/connect-to-cluster/)
 
 ###
 
