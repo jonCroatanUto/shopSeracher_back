@@ -1,11 +1,11 @@
 # Shop Searcher
 
-This web app it shows the most near places arround your approximate position.
+This web app it shows the most near places around your approximate position.
 The user can choose about multiple types of places: restaurants, pharmacy, aquarius, gym ...
 The user can choose the search radius.
 The user is allowed to have a profile, and save the favorite places, and order it in folders.
 
-**NOTE**: This repository content just the server side of the application. In order to used you will need to run the front side located in the this [repository](https://github.com/jonCroatanUto/shopSeracher_front.git)
+**NOTE**: This repository content just the server side of the application. In order to used you will need to run the front side located in the this [ Frontend repository](https://github.com/jonCroatanUto/shopSeracher_front.git)
 
 ### Features
 
@@ -45,7 +45,7 @@ git clone https://github.com/jonCroatanUto/shopSeracher_back.git
 npm install
 ```
 
-- run the app with the comand :
+- run the server side app with the comand :
 
 ```
 npm start
