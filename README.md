@@ -122,7 +122,3 @@ MONGO_DB_URL_PRODUCTION=
 # 🖇️ Contributing
 
 If you want to contribute, please fork the repository, create a new branch whit your contribution, and push the branch as a pull requests.
-
-```
-
-```
