@@ -51,17 +51,18 @@ npm install
 npm start
 ```
 
-- For this project you should use [movieDB API](https://developers.themoviedb.org/3)
+- For this project you should use [google api key](https://developers.google.com/maps/documentation/javascript/get-api-key)
 - Create an `.env` file in the root folder adding the following variables:
 
 ```
-GOOGLE_API_KEY= Need a [google api key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+GOOGLE_API_KEY= Need a google api key
 PORT="4000"
 MONGO_DB_URL_PRODUCTION=
-- Need to have an acount in [Altas mongoDB](https://www.mongodb.com/es/cloud/atlas/register)
-- Need to have the [conecction atlas key](https://docs.atlas.mongodb.com/connect-to-cluster/)
-
+- Need to have an acount in Altas mongoDB
+- Need to have the conecction atlas key
 ```
+- [Altas mongoDB](https://www.mongodb.com/es/cloud/atlas/register)
+- [conecction atlas key](https://docs.atlas.mongodb.com/connect-to-cluster/)
 
 ###
 
@@ -93,8 +94,6 @@ MONGO_DB_URL_PRODUCTION=
            ├─── `shopListModel` shop list collection structure
            ├─── `shopModel` shop collection structure
            └─── `usersModel` user collection structure
-   
-
 </pre>
 
 # ✨ Wishlist and decisions made
