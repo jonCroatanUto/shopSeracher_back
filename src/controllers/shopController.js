@@ -7,7 +7,7 @@ async function getNearlyShops(req, res) {
   try {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=cruise&location=${latitude}%2C${longitude}&radius=${radius}&type=${type}&key=${config.db.googleApi}`
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude}%2C${longitude}&radius=${radius}&type=${type}&key=${config.db.googleApi}`
       )
       .then((response) => {
         return res.send(response.data);
